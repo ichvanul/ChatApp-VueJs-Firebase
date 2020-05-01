@@ -8,6 +8,9 @@
     <div class="newChat">
       <img src="../../assets/img/messaging.png" alt="new-chat">
     </div>
+    <div class="logoutChat">
+      <img @click="logout" src="../../assets/img/logout.png" alt="logout">
+    </div>
   </div>
   <div class="bodyInput">
     <input type="text" placeholder="Search or start a new chat">
@@ -36,8 +39,23 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+
 export default {
   name: 'LeftSide',
+  data() {
+    return {
+      isLoggedIn: false,
+      currentUser: false,
+    };
+  },
+  methods: {
+    logout() {
+      firebase.auth().signOut().then(() => {
+        this.$router.push('/login');
+      });
+    },
+  },
 };
 </script>
 
@@ -78,9 +96,16 @@ export default {
 }
 
 .newChat img {
-  width: 35px;
-  height: 35px;
-  margin: 7px 0 0 350px;
+  width: 30px;
+  height: 30px;
+  margin: 7px 0 0 315px;
+  cursor: pointer;
+}
+
+.logoutChat img {
+  width: 30px;
+  height: 30px;
+  margin: 7px 0 0 20px;
   cursor: pointer;
 }
 

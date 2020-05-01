@@ -1,9 +1,16 @@
 <template>
-    <div>
-        <h3>Please login with your google account to continue</h3>
-
-        <button @click="login">Login with Google Account</button>
+  <div class="containerLogin">
+    <div class="headerLogin">
+      <h1>Login</h1>
     </div>
+    <div class="formLogin">
+      <input type="text" v-model="email" placeholder="email">
+      <input type="password" v-model="password" placeholder="password">
+    </div>
+    <div>
+      <button @click="login">Sign In</button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -11,23 +18,23 @@ import firebase from 'firebase';
 
 export default {
   name: 'Login',
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
   methods: {
-    login() {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-
-      firebase.auth().signInWithPopup(provider).then((result) => {
-        const token = result.credential.accessToken;
-        const { user } = result;
-
-        this.$router.push('/');
-      })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          const { email } = error;
-          const { credential } = error;
+    login(e) {
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+        .then((user) => {
+          console.log(`You are logged in as ${user.email}`);
+          this.$router.push('/home');
+        },
+        (err) => {
+          console.log(err.message);
         });
+      e.preventDefault();
     },
   },
 };
