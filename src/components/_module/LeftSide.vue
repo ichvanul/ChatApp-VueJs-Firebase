@@ -3,7 +3,7 @@
   <!-- Header -->
   <div class="headerNavbar">
     <div class="photoProfile">
-      <img src="../../assets/img/ryan.jpeg" alt="photo-profile">
+      <img @click="$emit('containerModal')" src="../../assets/img/ryan.jpeg" alt="photo-profile">
     </div>
     <div class="newChat">
       <img src="../../assets/img/messaging.png" alt="new-chat">
@@ -70,6 +70,7 @@ export default {
   src: url('../../assets/font/AirbnbCerealBold.ttf');
 }
 
+/* Header */
 .containerLeftSide {
   background: red;
   width: 35vw;
@@ -96,16 +97,16 @@ export default {
 }
 
 .newChat img {
-  width: 30px;
-  height: 30px;
-  margin: 7px 0 0 315px;
+  width: 25px;
+  height: 25px;
+  margin: 10px 0 0 315px;
   cursor: pointer;
 }
 
 .logoutChat img {
-  width: 30px;
-  height: 30px;
-  margin: 7px 0 0 20px;
+  width: 25px;
+  height: 25px;
+  margin: 10px 0 0 20px;
   cursor: pointer;
 }
 
@@ -129,8 +130,10 @@ export default {
   border: 1px solid white;
   margin: 10px 27px;
   outline: none;
+  padding: 0 0 0 20px;
 }
 
+/* Body */
 .bodyChat {
   display: flex;
   padding: 5px 25px;

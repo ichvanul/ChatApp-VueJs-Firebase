@@ -1,9 +1,9 @@
 <template>
 <div class="containerHome">
-  <!-- <Modal/> -->
   <div class="containerSideHome">
     <div>
-      <LeftSide/>
+      <LeftSide @containerModal="showProfile"/>
+      <Modal @closeProfile="closeProfile"/>
     </div>
     <div>
       <RightSide/>
@@ -19,7 +19,7 @@
 <script>
 import RightSide from '../components/_module/RightSide.vue';
 import LeftSide from '../components/_module/LeftSide.vue';
-// import Modal from '../components/_module/Modal.vue';
+import Modal from '../components/_module/Modal.vue';
 // import Navbar from '../components/_module/Navbar.vue';
 
 export default {
@@ -27,9 +27,17 @@ export default {
   components: {
     // Navbar,
     // RightSidebar,
-    // Modal,
+    Modal,
     LeftSide,
     RightSide,
+  },
+  methods: {
+    showProfile() {
+      document.querySelector('.containerModal').classList.add('containerModal-active');
+    },
+    closeProfile() {
+      document.querySelector('.containerModal').classList.remove('containerModal-active');
+    },
   },
 
 };

@@ -8,6 +8,12 @@
     <div class="nameProfile">
       <h5>Ichvanul Yulizar Putra</h5>
     </div>
+    <div class="mapProfile">
+      <img src="../../assets/img/map.png" alt="map">
+    </div>
+    <div class="attachProfile">
+      <img src="../../assets/img/attach.png" alt="attach">
+    </div>
   </div>
 
   <!-- Body -->
@@ -29,7 +35,8 @@
       <img src="../../assets/img/emot.png" alt="emoticon">
     </div>
     <div class="typeFooter">
-      <input @keyup.enter="saveMessage" v-model="message" type="text" placeholder="Type a message">
+      <input @keyup.enter="saveMessage" v-model="message" type="text"
+      placeholder="Type a message...">
     </div>
     <div class="audioFooter">
       <img src="../../assets/img/audio.png" alt="record">
@@ -108,7 +115,7 @@ export default {
 
 /* Header */
 .containerRightSide {
-  background: orange;
+  background: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -146,26 +153,34 @@ export default {
   font-family: airbnb;
 }
 
-/* Body */
-/* .kepala {
-  display: flex;
-  width: auto;
-} */
+.mapProfile img {
+  margin: 15px 15px 15px 500px;
+  width: 25px;
+  height: 25px;
+}
 
+.attachProfile img {
+  margin: 15px 0;
+  width: 25px;
+  height: 25px;
+}
+
+/* Body */
 .contentChat {
   display: flex;
   flex-direction: column;
   padding: 10px;
   overflow-y: scroll;
+  background: red;
+  height: 100%;
+  background-image: url('../../assets/img/wallpaperchat.jpg');
 }
 
 .bodySendChat {
-  background-color: aqua;
   display: flex;
 }
 
 .bodyReceiveChat {
-  background-color: yellow;
   display: flex;
   justify-items: right;
   /* flex-direction: column; */
@@ -175,7 +190,7 @@ export default {
   font-size: 14px;
   font-weight: 500;
   font-family: sans-serif;
-  background-color: white;
+  background-color: #ccffeb;
   margin: 5px 50px;
   padding: 7px;
   display: flex;
@@ -185,7 +200,7 @@ export default {
   font-size: 14px;
   font-weight: 500;
   font-family: sans-serif;
-  background-color: white;
+  background-color: #ccffeb;
   margin: 5px 5px 5px 700px;
   padding: 7px;
   display: flex;
@@ -267,6 +282,7 @@ export default {
   margin: 8px 0 0 12px;
   border: 1px solid white;
   outline: none;
+  padding: 0 0 0 20px;
 }
 
 .audioFooter img {

@@ -2,8 +2,11 @@
 <div class="containerModal">
   <div class="addModal">
     <div class="containerPhoto">
+      <div class="closeModal">
+        <img @click="$emit('closeProfile')" src="../../assets/img/close.png" alt="close">
+      </div>
       <div class="photoModal">
-        <img src="../../assets/img/ivan.jpg" alt="">
+        <img src="../../assets/img/ivan.jpg" alt="photo">
       </div>
       <div class="titleModal">
         <h5>Name</h5>
@@ -37,14 +40,24 @@ export default {
   height: 100vh;
   position: fixed;
   display: flex;
-  z-index: 999;
-  justify-content: center;
-  align-items: center;
+  z-index: 99;
+  justify-content:left;
+  align-items:center;
+  opacity: 0;
+  transition: linear 0.5s;
+}
+
+.containerModal-active {
+  visibility: visible;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  transition: linear 0.3s;
 }
 
 .addModal {
-  width: 400px;
-  height: 500px;
+  width: 435px;
+  height: 100vh;
   position: relative;
   background: white;
   display: flex;
@@ -65,6 +78,13 @@ export default {
   height: 170px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.closeModal img {
+  width: 20px;
+  height: 20px;
+  margin: 10px 0 0 420px;
+  cursor: pointer;
 }
 
 .titleModal {
