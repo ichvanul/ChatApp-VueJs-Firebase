@@ -12,21 +12,14 @@
 
   <!-- Body -->
   <div class="contentChat">
-    <div class="bodySendChat" v-for="message in messages" :key="message">
-      <!-- <div class="photoSendChat">
-        <img src="../../assets/img/ivan.jpg" alt="photo-profile">
-      </div> -->
-      <div class="messageSendChat">
-        <p> {{message.message}} </p>
-      </div>
-    </div>
-    <div class="bodyReceiveChat">
-      <div class="messageReceiveChat">
-        <p>Hi juga </p>
-      </div>
-      <!-- <div class="photoReceiveChat">
-        <img src="../../assets/img/ivan.jpg" alt="photo-profile">
-      </div> -->
+    <div :class="[message.author==authUser.email?'bodySendChat':'bodyReceiveChat']"
+    v-for="message in messages" :key="message">
+        <div :class="[message.author==authUser.email?'messageSendChat':'messageReceiveChat']">
+          <p> {{message.message}} </p>
+        </div>
+        <!-- <div :class="[message.author==authUser.email?'timeSendChat':'timeReceiveChat']">
+          <p> {{message.author}} </p>
+        </div> -->
     </div>
   </div>
 
@@ -46,6 +39,7 @@
 </template>
 
 <script>
+import firebase from 'firebase';
 import db from '../../firebase';
 
 export default {
@@ -54,6 +48,7 @@ export default {
     return {
       message: null,
       messages: [],
+      authUser: {},
     };
   },
   methods: {
@@ -61,6 +56,7 @@ export default {
       // save to firestore
       db.collection('chat').add({
         message: this.message,
+        author: this.authUser.email,
         createdAt: new Date(),
       });
       this.message = null;
@@ -76,7 +72,25 @@ export default {
     },
   },
   created() {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.authUser = user;
+      } else {
+        this.authUser = {};
+      }
+    });
     this.fetchMessage();
+  },
+  beforeRouteEnter(to, from, next) {
+    next((vm) => {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          next();
+        } else {
+          vm.$router.push('./login');
+        }
+      });
+    });
   },
 };
 </script>
@@ -133,6 +147,11 @@ export default {
 }
 
 /* Body */
+/* .kepala {
+  display: flex;
+  width: auto;
+} */
+
 .contentChat {
   display: flex;
   flex-direction: column;
@@ -148,19 +167,47 @@ export default {
 .bodyReceiveChat {
   background-color: yellow;
   display: flex;
+  justify-items: right;
+  /* flex-direction: column; */
 }
 
 .messageSendChat {
-  width: 100px;
   font-size: 14px;
   font-weight: 500;
   font-family: sans-serif;
   background-color: white;
   margin: 5px 50px;
   padding: 7px;
+  display: flex;
 }
 
 .messageReceiveChat {
+  font-size: 14px;
+  font-weight: 500;
+  font-family: sans-serif;
+  background-color: white;
+  margin: 5px 5px 5px 700px;
+  padding: 7px;
+  display: flex;
+  justify-items: left;
+}
+
+.messageReceiveChat p {
+  text-align: right;
+}
+
+.timeSendChat {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: sans-serif;
+  background-color: white;
+  margin: 5px 50px;
+  padding: 7px;
+  width: 100px;
+}
+
+.timeReceiveChat {
   width: 100px;
   font-size: 14px;
   font-weight: 500;
@@ -170,7 +217,15 @@ export default {
   padding: 7px;
 }
 
-.photoSendChat img {
+.timeSendChat p {
+  font-size: 10px;
+}
+
+.timeReceiveChat p {
+  font-size: 10px;
+}
+
+/* .photoSendChat img {
   width: 50px;
   height: 50px;
   object-fit: cover;
@@ -182,7 +237,7 @@ export default {
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
-}
+} */
 
 /* Footer */
 .containerFooter {

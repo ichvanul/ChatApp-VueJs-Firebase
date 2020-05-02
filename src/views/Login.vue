@@ -1,6 +1,18 @@
 <template>
   <div class="containerLogin">
     <div class="wallpaperLogin">
+      <div class="headerLogo">
+        <div class="bodyLogo">
+          <img src="../assets/img/logo.png" alt="logo">
+        </div>
+        <div class="welcomeLogo">
+          <p>Welcome to yukChat!</p>
+        </div>
+        <div class="sayLogo">
+          <p>Simple & Easy Way <br>
+            <span>to Connect with People</span></p>
+        </div>
+      </div>
       <div class="bodyLogin">
         <div class="headerLogin">
           <h1>USER LOGIN</h1>
@@ -90,12 +102,49 @@ export default {
   box-shadow: 0px 0px 20px 0px rgba(102,102,102,1);
 }
 
-.wallpaperLogin img {
-  position: relative;
+.headerLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  margin: 0 100px 0 0;
+  width: 400px;
+  height: 400px;
+}
+
+.bodyLogo img {
+  border-radius: 50%;
+  background-color: white;
+  object-fit: cover;
+  height: 150px;
+  width: 150px;
+}
+
+.welcomeLogo p {
+  color: #4dffff;
+  font-size: 35px;
+  font-weight: bolder;
+}
+
+.sayLogo {
+  margin: 25px 0;
+}
+
+.sayLogo p {
+  color: black;
+  text-align: center;
+  font-size: 20px;
+}
+
+.sayLogo p span {
+  color: #4dffff;
+  text-align: center;
+  font-size: 20px;
 }
 
 .bodyLogin {
-  background-color: none;
+  background-color: white;
   width: 300px;
   height: 300px;
 }
