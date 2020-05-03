@@ -85,7 +85,7 @@ export default {
 }
 
 .photoProfile {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .photoProfile img {

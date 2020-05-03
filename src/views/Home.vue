@@ -7,6 +7,7 @@
     </div>
     <div>
       <RightSide/>
+      <ModalProfile/>
     </div>
   </div>
   <div>
@@ -20,6 +21,7 @@
 import RightSide from '../components/_module/RightSide.vue';
 import LeftSide from '../components/_module/LeftSide.vue';
 import Modal from '../components/_module/Modal.vue';
+import ModalProfile from '../components/_module/ModalProfile.vue';
 // import Navbar from '../components/_module/Navbar.vue';
 
 export default {
@@ -27,6 +29,7 @@ export default {
   components: {
     // Navbar,
     // RightSidebar,
+    ModalProfile,
     Modal,
     LeftSide,
     RightSide,

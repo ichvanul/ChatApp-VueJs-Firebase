@@ -20,12 +20,12 @@
   <div class="contentChat">
     <div :class="[message.author==authUser.email?'bodySendChat':'bodyReceiveChat']"
     v-for="message in messages" :key="message">
-        <div :class="[message.author==authUser.email?'messageSendChat':'messageReceiveChat']">
-          <p> {{message.message}} </p>
-        </div>
-        <!-- <div :class="[message.author==authUser.email?'timeSendChat':'timeReceiveChat']">
-          <p> {{message.author}} </p>
-        </div> -->
+      <div :class="[message.author==authUser.email?'messageSendChat':'messageReceiveChat']">
+        <p> {{message.message}} </p>
+      </div>
+      <!-- <div :class="[message.author==authUser.email?'timeSendChat':'timeReceiveChat']">
+        <p> {{message.author}} </p>
+      </div> -->
     </div>
   </div>
 
@@ -131,7 +131,7 @@ export default {
 }
 
 .photoProfile {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 .photoProfile img {
@@ -170,10 +170,10 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  overflow-y: scroll;
   background: red;
-  height: 100%;
+  height: 76vh;
   background-image: url('../../assets/img/wallpaperchat.jpg');
+  overflow-y: scroll;
 }
 
 .bodySendChat {
@@ -286,7 +286,7 @@ export default {
 }
 
 .audioFooter img {
-  margin: 7px 0 0 12px;
+  margin: 7px 0 0 5px;
   cursor: pointer;
 }
 </style>
