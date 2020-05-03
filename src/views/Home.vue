@@ -6,8 +6,8 @@
       <Modal @closeProfile="closeProfile"/>
     </div>
     <div>
-      <RightSide/>
-      <ModalProfile/>
+      <RightSide @containerModalProfile="showStatus"/>
+      <ModalProfile @closeStatus="closeStatus"/>
     </div>
   </div>
   <div>
@@ -40,6 +40,12 @@ export default {
     },
     closeProfile() {
       document.querySelector('.containerModal').classList.remove('containerModal-active');
+    },
+    showStatus() {
+      document.querySelector('.containerModalProfile').classList.add('containerModalProfile-active');
+    },
+    closeStatus() {
+      document.querySelector('.containerModalProfile').classList.remove('containerModalProfile-active');
     },
   },
 

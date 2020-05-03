@@ -18,9 +18,17 @@
           <h1>SIGN UP NOW</h1>
         </div>
         <div class="formLogin">
+          <div class="formFullname">
+            <label for="fullname">Fullname</label>
+            <input id="fullname" type="text" v-model="displayName" placeholder="Fullname">
+          </div>
           <div class="formEmail">
             <label for="email">Email</label>
             <input id="email" type="text" v-model="email" placeholder="Email">
+          </div>
+          <div class="formNumber">
+            <label for="number">Phone Number</label>
+            <input id="number" type="text" v-model="number" placeholder="Number">
           </div>
           <div class="formPassword">
             <label for="password">Password</label>
@@ -46,21 +54,33 @@ export default {
   name: 'register',
   data() {
     return {
+      displayName: '',
       email: '',
       password: '',
+      number: '',
     };
   },
   methods: {
     register(e) {
+      e.preventDefault();
       firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
         .then((user) => {
-          console.log(`Account created for ${user.email}`);
-          this.$router.push('/home');
+          firebase.firestore().collection('user').doc(firebase.auth().currentUser.uid)
+            .set({
+              email: this.email,
+              displayName: this.displayName,
+              number: this.number,
+              image: 'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
+            })
+            .catch((error) => {
+              console.log('register failed', error);
+            });
+          console.log(`Congratulation ${user.displayName}, Your Register is Succes!`);
+          this.$router.push('/login');
         },
         (err) => {
           console.log(err.message);
         });
-      e.preventDefault();
     },
   },
 };
@@ -149,9 +169,9 @@ export default {
 }
 
 .bodyLogin {
-  background-color: none;
-  width: 300px;
-  height: 300px;
+  background-color: white;
+  width: 400px;
+  height: 450px;
 }
 
 .headerLogin {
@@ -165,12 +185,16 @@ export default {
 .formLogin label {
   display: block;
   text-align: center;
-  padding: 25px 0 5px 0;
+  padding: 15px 0 5px 0;
   color: #4dffff;
 }
 
 ::placeholder { /* Most modern browsers support this now. */
    color: white;
+}
+
+.formLogin {
+  text-align: center;
 }
 
 .formLogin input {
@@ -217,5 +241,11 @@ export default {
   text-decoration: none;
   color: #4dffff;
   cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .containerLogin {
+  display: none;
+  }
 }
 </style>

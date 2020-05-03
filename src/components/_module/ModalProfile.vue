@@ -1,26 +1,41 @@
 <template>
   <div class="containerModalProfile">
-    <div class="addModal">
+    <div class="addModal" v-for="data in myData" :key="data">
       <div class="closeModal">
-        <img src="../../assets/img/close.png" alt="close">
+        <img @click="$emit('closeStatus')" src="../../assets/img/close.png" alt="close">
       </div>
       <div class="containerPhoto">
         <div class="photoModal">
-          <img src="../../assets/img/ivan.jpg" alt="photo">
+          <img src="../../assets/img/profil.png" alt="photo">
         </div>
         <div class="nameModal">
-          <h5>Ichvanul Yulizar Putra</h5>
+          <h5> {{data.displayName}} </h5>
         </div>
       </div>
       <div class="headerStatus">
-        <div class="bodyStatus">
-          <h5>Status and email</h5>
-        </div>
         <div class="contentStatus">
-          <h5>Please stay, forever with me.</h5>
+          <div class="statusIcon">
+            <img src="../../assets/img/about.png" alt="">
+          </div>
+          <div class="statusData">
+            <h5> I am busy </h5>
+          </div>
         </div>
         <div class="emailStatus">
-          <h5>ichvanulyp@gmail.com</h5>
+          <div class="emailIcon">
+            <img src="../../assets/img/email.png" alt="">
+          </div>
+          <div class="emailData">
+            <h5> {{data.email}} </h5>
+          </div>
+        </div>
+        <div class="contentStatus">
+          <div class="statusIcon">
+            <img src="../../assets/img/phone.png" alt="">
+          </div>
+          <div class="statusData">
+            <h5> {{data.number}} </h5>
+          </div>
         </div>
       </div>
     </div>
@@ -28,8 +43,32 @@
 </template>
 
 <script>
+import firebase from 'firebase';
+import db from '../../firebase';
+
 export default {
   name: 'ModalProfile',
+  data() {
+    return {
+      myData: [],
+    };
+  },
+  methods: {
+    getMyData() {
+      // eslint-disable-next-line no-undef
+      db.collection('user').where('email', '==', firebase.auth().currentUser.email).onSnapshot((querySnapshot) => {
+        const myProfile = [];
+        querySnapshot.forEach((doc) => {
+          myProfile.push(doc.data());
+        });
+        this.myData = myProfile;
+        console.log(myProfile);
+      });
+    },
+  },
+  created() {
+    this.getMyData();
+  },
 };
 </script>
 
@@ -51,15 +90,25 @@ export default {
   position: fixed;
   display: flex;
   z-index: 99;
-  align-items:center;
+  align-items: center;
   justify-content: center;
   top: 0px;
   right: 0px;
+  visibility: hidden;
+  opacity: 0;
+  transition: linear 0.3s;
+}
+
+.containerModalProfile-active {
+  visibility: visible;
+  opacity: 1;
+  transition: linear 0.3s;
+  top: 0;
 }
 
 .addModal {
-  width: 440px;
-  height: 75vh;
+  width: 350px;
+  height: 60vh;
   position: relative;
   background: white;
   display: flex;
@@ -68,10 +117,13 @@ export default {
   padding: 0;
   left: 0;
   top: 0;
+  border-radius: 10px;
 }
 
 .closeModal {
   background-color: #4dffff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .closeModal img {
@@ -109,20 +161,17 @@ export default {
 }
 
 .headerStatus {
-  background-color: tomato;
-}
-
-.bodyStatus h5 {
-  font-size: 17px;
-  font-family: sans-serif;
-  color: #4dffff;
-  font-weight: bolder;
-  padding: 10px 0 0 10px;
+  background-color: white;
+  border-bottom: 10px solid #4dffff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .contentStatus {
-  background-color: violet;
-  padding: 10px 0 0 10px;
+  background-color: white;
+  padding: 10px 0 0 14px;
+  display: flex;
+  flex-direction: row;
 }
 
 .contentStatus h5 {
@@ -130,11 +179,29 @@ export default {
   font-family: sans-serif;
   font-weight: 400;
   margin-top: 5px;
+  margin: 5px 0 0 15px;
+}
+
+.contentStatus img {
+  width: 35px;
+  height: 35px;
+}
+
+.emailStatus {
+  background-color: white;
+  padding: 10px 0 10px 10px;
+  display: flex;
 }
 
 .emailStatus h5 {
   font-size: 17px;
   font-family: sans-serif;
   font-weight: 400;
+  margin: 12px 0 0 15px;
+}
+
+.emailStatus img {
+  width: 40px;
+  height: 40px;
 }
 </style>

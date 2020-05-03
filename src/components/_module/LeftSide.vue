@@ -3,7 +3,9 @@
   <!-- Header -->
   <div class="headerNavbar">
     <div class="photoProfile">
-      <img @click="$emit('containerModal')" src="../../assets/img/ryan.jpeg" alt="photo-profile">
+      <img @click="$emit('containerModal')" :src="user[0].image" alt="photo-profile"
+      v-if="photo==null">
+      <img @click="$emit('containerModal')" :src="photo" alt="photo-profile" v-else>
     </div>
     <div class="newChat">
       <img src="../../assets/img/messaging.png" alt="new-chat">
@@ -20,7 +22,7 @@
   <div class="headerChat">
     <div class="bodyChat" v-for="chat in 15" :key="chat">
       <div class="photoChat">
-        <img src="../../assets/img/vivi.jpg" alt="">
+        <img src="../../assets/img/profil.png" alt="">
       </div>
       <div class="contentChat">
         <div class="nameChat">
@@ -40,6 +42,7 @@
 
 <script>
 import firebase from 'firebase';
+import db from '../../firebase';
 
 export default {
   name: 'LeftSide',
@@ -47,6 +50,9 @@ export default {
     return {
       isLoggedIn: false,
       currentUser: false,
+      email: firebase.auth().currentUser.email,
+      user: [],
+      photo: null,
     };
   },
   methods: {
@@ -55,6 +61,18 @@ export default {
         this.$router.push('/login');
       });
     },
+    profile() {
+      db.collection('user').where('email', '==', this.email).onSnapshot((querySnapshot) => {
+        const myprofil = [];
+        querySnapshot.forEach((doc) => {
+          myprofil.push(doc.data());
+        });
+        this.user = myprofil;
+      });
+    },
+  },
+  created() {
+    this.profile();
   },
 };
 </script>
@@ -78,7 +96,7 @@ export default {
 }
 
 .headerNavbar {
-  background: #ccffeb;
+  background: #4dffff;
   display: flex;
   padding: 10px;
   height: 8vh;
@@ -97,15 +115,15 @@ export default {
 }
 
 .newChat img {
-  width: 25px;
-  height: 25px;
-  margin: 10px 0 0 315px;
+  width: 30px;
+  height: 30px;
+  margin: 10px 0 0 300px;
   cursor: pointer;
 }
 
 .logoutChat img {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   margin: 10px 0 0 20px;
   cursor: pointer;
 }
@@ -119,7 +137,7 @@ export default {
 }
 
 .bodyInput {
-  background-color: #e6fff5;
+  background-color: #99ffff;
   border: 1px solid #e6fff5;
 }
 

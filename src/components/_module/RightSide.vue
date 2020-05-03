@@ -3,7 +3,8 @@
   <!-- Header -->
   <div class="headerNavbar">
     <div class="photoProfile">
-      <img src="../../assets/img/ivan.jpg" alt="photo-profile">
+      <img @click="$emit('containerModalProfile')" src="../../assets/img/profil.png"
+      alt="photo-profile">
     </div>
     <div class="nameProfile">
       <h5>Ichvanul Yulizar Putra</h5>
@@ -123,7 +124,7 @@ export default {
 }
 
 .headerNavbar {
-  background: #ccffeb;
+  background: #4dffff;
   display: flex;
   padding: 10px;
   height: 8vh;
@@ -154,15 +155,17 @@ export default {
 }
 
 .mapProfile img {
-  margin: 15px 15px 15px 500px;
-  width: 25px;
-  height: 25px;
+  margin: 10px 15px 0 500px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 .attachProfile img {
-  margin: 15px 0;
-  width: 25px;
-  height: 25px;
+  margin: 10px 0 0px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }
 
 /* Body */
@@ -178,12 +181,19 @@ export default {
 
 .bodySendChat {
   display: flex;
+  justify-content: flex-start;
+  padding: 0 20px;
 }
 
 .bodyReceiveChat {
   display: flex;
-  justify-items: right;
+  justify-content: flex-end;
+  padding: 0 20px;
   /* flex-direction: column; */
+}
+
+.messageSendChat p {
+  display: flex;
 }
 
 .messageSendChat {
@@ -191,7 +201,7 @@ export default {
   font-weight: 500;
   font-family: sans-serif;
   background-color: #ccffeb;
-  margin: 5px 50px;
+  margin: 5px 0;
   padding: 7px;
   display: flex;
 }
@@ -204,7 +214,7 @@ export default {
   margin: 5px 5px 5px 700px;
   padding: 7px;
   display: flex;
-  justify-items: left;
+  justify-content: left;
 }
 
 .messageReceiveChat p {
@@ -257,7 +267,7 @@ export default {
 /* Footer */
 .containerFooter {
   display: flex;
-  background-color: #ccffeb;
+  background-color: #4dffff;
   position: fixed;
   bottom: 0;
   height: 10vh;
@@ -265,13 +275,13 @@ export default {
 }
 
 .emotFooter {
-  margin: 5px;
+  margin: 5px 0 0 10px;
 }
 
 .emotFooter img {
-  width: 40px;
-  height: 40px;
-  padding: 7px 0;
+  width: 35px;
+  height: 35px;
+  padding: 5px 0 0;
   cursor: pointer;
 }
 
@@ -279,14 +289,16 @@ export default {
   border-radius: 30px;
   height: 45px;
   width: 55vw;
-  margin: 8px 0 0 12px;
+  margin: 8px 0 0 15px;
   border: 1px solid white;
   outline: none;
   padding: 0 0 0 20px;
 }
 
 .audioFooter img {
-  margin: 7px 0 0 5px;
+  margin: 15px 0 0 10px;
   cursor: pointer;
+  width: 30px;
+  height: 30px;
 }
 </style>
