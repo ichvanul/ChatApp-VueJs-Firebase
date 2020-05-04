@@ -8,9 +8,8 @@
       <div class="photoModal">
         <img :src="user[0].image" alt="photo">
       </div>
-      <div>
-        <input type="file" accept="image/*"
-        @change="save">
+      <div class="inputModal">
+        <input type="file" accept="image/*" @change="save">
       </div>
       <div class="nameModal">
         <h5>Ryan Hidayat</h5>
@@ -42,6 +41,26 @@
         </div>
       </div>
     </div>
+    <div class="currentLocation">
+      <div style="max-width: 100%; margin: 0 auto; display: flex; align-items:
+      center; justify-content: space-between">
+            <div class="myCoordinate">
+                <h1>My coordinates:</h1>
+                <p>{{ myCoordinates.lat }} Latitude, {{ myCoordinates.lng }} Longitude</p>
+            </div>
+            <div class="mapCoordinate">
+                <h1>Map coordinates:</h1>
+                <p>{{ mapCoordinates.lat }} Latitude, {{ mapCoordinates.lng }} Longitude</p>
+            </div>
+        </div>
+        <GmapMap
+            :center="myCoordinates"
+            :zoom="zoom"
+            style="width:319.5px; height:180px; margin: 20px auto;"
+            ref="mapRef"
+            @dragend="handleDrag"
+        ></GmapMap>
+    </div>
   </div>
 </div>
 </template>
@@ -59,6 +78,12 @@ export default {
       photo: null,
       imageData: null,
       picture: null,
+      map: null,
+      myCoordinates: {
+        lat: 0,
+        lng: 0,
+      },
+      zoom: 7,
     };
   },
   methods: {
@@ -90,9 +115,54 @@ export default {
         });
       });
     },
+    handleDrag() {
+      // get center and zoom level, store in localstorage
+      const center = {
+        lat: this.map.getCenter().lat(),
+        lng: this.map.getCenter().lng(),
+      };
+      const zoom = this.map.getZoom();
+      localStorage.center = JSON.stringify(center);
+      localStorage.zoom = zoom;
+    },
+  },
+  computed: {
+    mapCoordinates() {
+      if (!this.map) {
+        return {
+          lat: 0,
+          lng: 0,
+        };
+      }
+      return {
+        lat: this.map.getCenter().lat().toFixed(4),
+        lng: this.map.getCenter().lng().toFixed(4),
+      };
+    },
   },
   created() {
     this.profile();
+    if (localStorage.center) {
+      this.myCoordinates = JSON.parse(localStorage.center);
+    } else {
+      // get user's coordinates from browser request
+      this.$getLocation({})
+        .then((coordinates) => {
+          this.myCoordinates = coordinates;
+        })
+        .catch((error) => console.log(error));
+    }
+    // does the user have a saved zoom? use it instead of the default
+    if (localStorage.zoom) {
+      // eslint-disable-next-line radix
+      this.zoom = parseInt(localStorage.zoom);
+    }
+  },
+  mounted() {
+    // add the map to a data object
+    this.$refs.mapRef.$mapPromise.then((map) => {
+      this.map = map;
+    });
   },
 };
 </script>
@@ -126,7 +196,7 @@ export default {
 }
 
 .addModal {
-  width: 475px;
+  width: 430px;
   height: 100vh;
   position: relative;
   background: white;
@@ -158,10 +228,22 @@ export default {
 }
 
 .photoModal img {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.inputModal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputModal input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .titleModal {
@@ -178,53 +260,69 @@ export default {
 }
 
 .nameModal h5 {
-  font-size: 30px;
+  font-size: 20px;
   font-family: sans-serif;
   font-weight: 500;
-  padding: 20px;
+  padding: 10px;
 }
 
 .headerStatus {
   background-color: white;
-  border-bottom: 50px solid #4dffff;
+  border-bottom: 10px solid #4dffff;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }
 
 .contentStatus {
   background-color: white;
-  padding: 25px 0 0 14px;
+  padding: 5px 0 0 14px;
   display: flex;
   flex-direction: row;
 }
 
 .contentStatus h5 {
-  font-size: 25px;
+  font-size: 15px;
   font-family: sans-serif;
   font-weight: 400;
-  margin: 10px 0 0 15px;
+  margin: 5px 0 0 15px;
 }
 
 .contentStatus img {
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
 }
 
 .emailStatus {
   background-color: white;
-  padding: 25px 0 10px 10px;
+  padding: 10px 0 10px 10px;
   display: flex;
 }
 
 .emailStatus h5 {
-  font-size: 25px;
+  font-size: 15px;
   font-family: sans-serif;
   font-weight: 400;
-  margin: 15px 0 0 20px;
+  margin: 5px 0 0 20px;
 }
 
 .emailStatus img {
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
+}
+
+.currentLocation {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+
+.myCoordinate h1 {
+  font-size: 15px;
+  padding: 10px;
+}
+
+.mapCoordinate h1 {
+  font-size: 15px;
+  padding: 10px;
 }
 </style>

@@ -26,7 +26,7 @@
       </div>
       <div class="contentChat">
         <div class="nameChat">
-          <h5>Vivi Alida</h5>
+          <h5>Joseph Widyatama</h5>
         </div>
         <div class="chatChat">
           <h5>Lorem ipsum dolor sit amet consectetur.</h5>
