@@ -35,7 +35,7 @@ yukChat! is a Real-Time Chat Web. This app written with Vue Js as front-end, Fir
 
 ## Demo
 
-![Screenshot](https://github.com/ichvanul/PointOfSales-VueJs/blob/master/src/assets/img/collage2.jpg)
+![Screenshot](https://github.com/ichvanul/ChatApp-VueJs-Firebase/blob/master/src/assets/img/chat.jpg)
 
 ## How To Install
 
@@ -61,6 +61,7 @@ yukChat! is a Real-Time Chat Web. This app written with Vue Js as front-end, Fir
    ```
 6. ### Customize configuration
    See [Configuration Reference Vue Js](https://cli.vuejs.org/config/)
+   <br>
    See [Configuration Reference Firebase](https://firebase.google.com/)
 
 ## Contact
