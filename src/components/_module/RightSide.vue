@@ -10,10 +10,10 @@
       <h5>Ichvanul Yulizar Putra</h5>
     </div>
     <div class="mapProfile">
-      <img src="../../assets/img/map.png" alt="map">
+      <i class="fas fa-map-marker-alt"></i>
     </div>
     <div class="attachProfile">
-      <img src="../../assets/img/attach.png" alt="attach">
+      <i class="fas fa-paperclip"></i>
     </div>
   </div>
 
@@ -24,23 +24,20 @@
       <div :class="[message.author==authUser.email?'messageSendChat':'messageReceiveChat']">
         <p> {{message.message}} </p>
       </div>
-      <!-- <div :class="[message.author==authUser.email?'timeSendChat':'timeReceiveChat']">
-        <p> {{message.author}} </p>
-      </div> -->
     </div>
   </div>
 
   <!-- Footer -->
   <div class="containerFooter">
     <div class="emotFooter">
-      <img src="../../assets/img/emot.png" alt="emoticon">
+      <i class="fas fa-smile-beam"></i>
     </div>
     <div class="typeFooter">
       <input @keyup.enter="saveMessage" v-model="message" type="text"
       placeholder="Type a message...">
     </div>
     <div class="audioFooter">
-      <img src="../../assets/img/audio.png" alt="record">
+      <i class="fas fa-microphone"></i>
     </div>
   </div>
 </div>
@@ -103,7 +100,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @font-face {
   font-family: airbnb;
   src: url('../../assets/font/AirbnbCerealBold.ttf');
@@ -115,159 +112,107 @@ export default {
 }
 
 /* Header */
-.containerRightSide {
+.containerRightSide{
   background: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 65vw;
+  .headerNavbar{
+    background: #303a52;
+    display: flex;
+    padding: 10px;
+    height: 8vh;
+    border-left: 1px solid white;
+    .photoProfile {
+      margin-left: 15px;
+      img{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+    .nameProfile{
+      margin: 0 15px;
+      h5{
+        margin: 15px 0;
+        font-size: 17px;
+        font-weight: 700;
+        font-family: airbnb;
+        color: #fc85ae;
+      }
+    }
+    .mapProfile{
+      i{
+        margin: 10px 15px 0 500px;
+        font-size: 35px;
+        cursor: pointer;
+        color: #fc85ae;
+      }
+    }
+    .attachProfile{
+      i{
+        margin: 10px 0 0 10px;
+        font-size: 35px;
+        cursor: pointer;
+        color: #fc85ae;
+      }
+    }
+  }
+  /* Body */
+  .contentChat{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    height: 76vh;
+    background-image: url('../../assets/img/wallpaperchat.jpg');
+    overflow-y: scroll;
+    .bodySendChat{
+      display: flex;
+      justify-content: flex-start;
+      padding: 0 20px;
+      .messageSendChat{
+        font-size: 14px;
+        font-weight: 500;
+        font-family: sans-serif;
+        background-color: #fc85ae;
+        margin: 5px 0;
+        padding: 7px;
+        display: flex;
+        p{
+          display: flex;
+          color: #303a52;
+        }
+      }
+    }
+    .bodyReceiveChat{
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 20px;
+      .messageReceiveChat {
+        font-size: 14px;
+        font-weight: 500;
+        font-family: sans-serif;
+        background-color: #fc85ae;
+        margin: 5px 5px 5px 700px;
+        padding: 7px;
+        display: flex;
+        justify-content: left;
+        p {
+          text-align: right;
+          color: #303a52;
+        }
+      }
+    }
+  }
 }
-
-.headerNavbar {
-  background: #4dffff;
-  display: flex;
-  padding: 10px;
-  height: 8vh;
-  border-left: 1px solid white;
-}
-
-.photoProfile {
-  margin-left: 15px;
-}
-
-.photoProfile img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.nameProfile {
-  margin: 0 15px;
-}
-
-.nameProfile h5 {
-  margin: 15px 0;
-  font-size: 17px;
-  font-weight: 700;
-  font-family: airbnb;
-}
-
-.mapProfile img {
-  margin: 10px 15px 0 500px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-.attachProfile img {
-  margin: 10px 0 0px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-/* Body */
-.contentChat {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background: red;
-  height: 76vh;
-  background-image: url('../../assets/img/wallpaperchat.jpg');
-  overflow-y: scroll;
-}
-
-.bodySendChat {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0 20px;
-}
-
-.bodyReceiveChat {
-  display: flex;
-  justify-content: flex-end;
-  padding: 0 20px;
-  /* flex-direction: column; */
-}
-
-.messageSendChat p {
-  display: flex;
-}
-
-.messageSendChat {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: sans-serif;
-  background-color: #ccffeb;
-  margin: 5px 0;
-  padding: 7px;
-  display: flex;
-}
-
-.messageReceiveChat {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: sans-serif;
-  background-color: #ccffeb;
-  margin: 5px 5px 5px 700px;
-  padding: 7px;
-  display: flex;
-  justify-content: left;
-}
-
-.messageReceiveChat p {
-  text-align: right;
-}
-
-.timeSendChat {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: sans-serif;
-  background-color: white;
-  margin: 5px 50px;
-  padding: 7px;
-  width: 100px;
-}
-
-.timeReceiveChat {
-  width: 100px;
-  font-size: 14px;
-  font-weight: 500;
-  font-family: sans-serif;
-  background-color: white;
-  margin: 5px 5px 5px 700px;
-  padding: 7px;
-}
-
-.timeSendChat p {
-  font-size: 10px;
-}
-
-.timeReceiveChat p {
-  font-size: 10px;
-}
-
-/* .photoSendChat img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-.photoReceiveChat img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-} */
 
 /* Footer */
 .containerFooter {
   display: flex;
-  background-color: #4dffff;
+  background-color: #303a52;
   position: fixed;
   bottom: 0;
   height: 10vh;
@@ -278,11 +223,11 @@ export default {
   margin: 5px 0 0 10px;
 }
 
-.emotFooter img {
-  width: 35px;
-  height: 35px;
-  padding: 5px 0 0;
+.emotFooter i {
+  font-size: 35px;
+  padding: 9px 0 0;
   cursor: pointer;
+  color: #fc85ae;
 }
 
 .typeFooter input {
@@ -295,10 +240,10 @@ export default {
   padding: 0 0 0 20px;
 }
 
-.audioFooter img {
-  margin: 15px 0 0 10px;
+.audioFooter i {
+  margin: 15px 0 0 14px;
+  color: #fc85ae;
   cursor: pointer;
-  width: 30px;
-  height: 30px;
+  font-size: 35px;
 }
 </style>

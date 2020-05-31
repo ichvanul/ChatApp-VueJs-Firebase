@@ -8,10 +8,10 @@
       <img @click="$emit('containerModal')" :src="photo" alt="photo-profile" v-else>
     </div>
     <div class="newChat">
-      <img src="../../assets/img/messaging.png" alt="new-chat">
+      <i class="fas fa-comment"></i>
     </div>
     <div class="logoutChat">
-      <img @click="logout" src="../../assets/img/logout.png" alt="logout">
+      <i @click="logout" class="fas fa-sign-out-alt"></i>
     </div>
   </div>
   <div class="bodyInput">
@@ -26,14 +26,14 @@
       </div>
       <div class="contentChat">
         <div class="nameChat">
-          <h5>Joseph Widyatama</h5>
+          <h5>Joseph bin Salman</h5>
         </div>
         <div class="chatChat">
           <h5>Lorem ipsum dolor sit amet consectetur.</h5>
         </div>
       </div>
       <div class="timeChat">
-        <h5>1.30 PM</h5>
+        <h5>12.30 PM</h5>
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 * {
   margin: 0;
   padding: 0;
@@ -88,112 +88,106 @@ export default {
   src: url('../../assets/font/AirbnbCerealBold.ttf');
 }
 
-/* Header */
-.containerLeftSide {
-  background: red;
+.containerLeftSide{
   width: 35vw;
   height: 100%;
-}
+  /* Header */
+  .headerNavbar{
+    background: #303a52;
+    display: flex;
+    padding: 10px;
+    height: 8vh;
+    .photoProfile{
+      margin-left: 15px;
+      img{
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+    .newChat{
+      i{
+        font-size: 35px;
+        margin: 10px 0 0 290px;
+        color: #fc85ae;
+        cursor: pointer;
+      }
+    }
+    .logoutChat{
+      i{
+        font-size: 35px;
+        margin: 10px 0 0 20px;
+        color: #fc85ae;
+        cursor: pointer;
+      }
+    }
+  }
+  .bodyInput{
+    background-color: #574b90;
+    border: 1px solid #574b90;
+    input{
+      width: 420px;
+      height: 30px;
+      border-radius: 20px;
+      border: 1px solid white;
+      margin: 10px 27px;
+      outline: none;
+      padding: 0 0 0 20px;
+    }
+  }
 
-.headerNavbar {
-  background: #4dffff;
-  display: flex;
-  padding: 10px;
-  height: 8vh;
-}
-
-.photoProfile {
-  margin-left: 15px;
-}
-
-.photoProfile img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.newChat img {
-  width: 30px;
-  height: 30px;
-  margin: 10px 0 0 300px;
-  cursor: pointer;
-}
-
-.logoutChat img {
-  width: 30px;
-  height: 30px;
-  margin: 10px 0 0 20px;
-  cursor: pointer;
-}
-
-.headerChat {
-  background: #ffffff;
-  height: 92vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-}
-
-.bodyInput {
-  background-color: #99ffff;
-  border: 1px solid #e6fff5;
-}
-
-.bodyInput input {
-  width: 420px;
-  height: 30px;
-  border-radius: 20px;
-  border: 1px solid white;
-  margin: 10px 27px;
-  outline: none;
-  padding: 0 0 0 20px;
-}
-
-/* Body */
-.bodyChat {
-  display: flex;
-  padding: 5px 25px;
-  border-bottom: 1px solid #e6fff5;
-}
-
-.photoChat {
-  background-color: white;
-}
-
-.photoChat img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  padding-top: 5px;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.contentChat {
-  padding: 10px 10px;
-}
-
-.nameChat h5 {
-  font-size: 17px;
-  font-weight: bolder;
-  font-family: airbnb;
-}
-
-.chatChat h5 {
-  font-size: 14px;
-  font-weight: 400;
-  font-family: sans-serif;
-}
-
-.timeChat {
-  padding: 10px 10px;
-}
-
-.timeChat h5 {
-  font-size: 14px;
-  font-weight: 500;
-  font-family: sans-serif;
+  /* Body */
+  .headerChat{
+    background: whitesmoke;
+    height: 92vh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    .bodyChat{
+      display: flex;
+      padding: 5px 25px;
+      border-bottom: 1px solid #e6fff5;
+      .photoChat{
+        img{
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          padding-top: 5px;
+          object-fit: cover;
+          cursor: pointer;
+        }
+      }
+    }
+    .contentChat {
+      padding: 10px 10px;
+      .nameChat{
+        h5{
+          font-size: 17px;
+          font-weight: bolder;
+          font-family: airbnb;
+          color: #303a52;
+        }
+      }
+      .chatChat{
+        h5{
+          font-size: 14px;
+          font-weight: 400;
+          font-family: sans-serif;
+          color: #303a52;
+        }
+      }
+    }
+    .timeChat{
+      padding: 10px 10px;
+      h5{
+        font-size: 14px;
+        font-weight: 600;
+        font-family: sans-serif;
+        color: #303a52;
+      }
+    }
+  }
 }
 </style>

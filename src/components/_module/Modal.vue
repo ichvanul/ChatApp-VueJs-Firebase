@@ -207,7 +207,7 @@ export default {
 }
 
 .closeModal {
-  background-color: #4dffff;
+  background-color: #303a52;
   display: flex;
   justify-content: flex-end;
   border-top-right-radius: 10px;
@@ -256,7 +256,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-bottom: 10px solid #4dffff;
+  border-bottom: 10px solid #303a52;
 }
 
 .nameModal h5 {
@@ -268,7 +268,7 @@ export default {
 
 .headerStatus {
   background-color: white;
-  border-bottom: 10px solid #4dffff;
+  border-bottom: 10px solid #303a52;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
 }

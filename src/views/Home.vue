@@ -10,10 +10,6 @@
       <ModalProfile @closeStatus="closeStatus"/>
     </div>
   </div>
-  <div>
-    <!-- <Navbar/> -->
-    <!-- <RightSidebar/> -->
-  </div>
 </div>
 </template>
 
@@ -22,13 +18,10 @@ import RightSide from '../components/_module/RightSide.vue';
 import LeftSide from '../components/_module/LeftSide.vue';
 import Modal from '../components/_module/Modal.vue';
 import ModalProfile from '../components/_module/ModalProfile.vue';
-// import Navbar from '../components/_module/Navbar.vue';
 
 export default {
   name: 'Home',
   components: {
-    // Navbar,
-    // RightSidebar,
     ModalProfile,
     Modal,
     LeftSide,
